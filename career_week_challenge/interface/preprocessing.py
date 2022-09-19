@@ -7,6 +7,7 @@ from sklearn.pipeline import make_pipeline
 from sklearn.compose import make_column_transformer
 from imblearn.over_sampling import ADASYN
 from career_week_challenge.data.data import Get_data
+import ipdb
 
 class ColumnDropper(TransformerMixin, BaseEstimator):
     def __init__(self, columns):
@@ -19,7 +20,7 @@ class ColumnDropper(TransformerMixin, BaseEstimator):
         X= self.transform(X)
         return X.columns
 
-def preprocess(X_train:pd.DataFrame, y_train:pd.Series):
+def preprocess(X_train:pd.DataFrame, name= 'train'):
     """takes in a dataframe and deos some preprocessing"""
 
     #get categorical and numerical columns
@@ -46,8 +47,20 @@ def preprocess(X_train:pd.DataFrame, y_train:pd.Series):
     )
     #preprocess data
     X_train_preprocessed = preproc_base_pipeline.fit_transform(X_train)
-    X_train_preprocessed =pd.DataFrame(X_train_preprocessed)
-    #Due to uneven % in classes , resample data to add more to minority class
-    X_resampled , y_resampled = ADASYN().fit_resample(X_train_preprocessed, y_train)
+    print(f'############### SHAPE x-TRAIN-PREPROCESSED IS {X_train_preprocessed.shape} ###############')
 
+    if name == 'train':
+        X_train_preprocessed =pd.DataFrame(X_train_preprocessed)
+        return X_train_preprocessed
+
+    elif name == 'pred':
+        return preproc_base_pipeline
+    else:
+        return None
+
+
+def resample_data(X_train_preprocessed, y_train):
+    """resample preprocessed data"""
+     #Due to uneven % in classes , resample data to add more to minority class
+    X_resampled , y_resampled = ADASYN().fit_resample(X_train_preprocessed, y_train)
     return X_resampled, y_resampled

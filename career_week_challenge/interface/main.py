@@ -60,6 +60,7 @@ def pred(pred_data= None):
         pred_data_file_path = os.path.join('raw_data', 'pred_data.csv') # load data to use for prediction
         pred_data = pd.read_csv(pred_data_file_path)
 
+    #TODO refactor code of line below to not repeat yourself
     X_train, y_train = Get_data()
     pred_data_id = pred_data[['uuid']]
     pred_data_features = pred_data.drop(columns=['uuid', 'default'], axis=1)

@@ -7,7 +7,6 @@ from sklearn.pipeline import make_pipeline
 from sklearn.compose import make_column_transformer
 from imblearn.over_sampling import ADASYN
 from career_week_challenge.data.data import Get_data
-import ipdb
 
 class ColumnDropper(TransformerMixin, BaseEstimator):
     def __init__(self, columns):

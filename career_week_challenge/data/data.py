@@ -2,7 +2,7 @@ import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from google.cloud import storage, bigquery
+# from google.cloud import storage, bigquery
 
 def Get_data():
     """retrieves data from csv and returns DataFrame"""

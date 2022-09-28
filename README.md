@@ -6,4 +6,4 @@
 - Data Source: local
 
 # Install
-Go to `https://github.com/willsketch/Le_wagon_career_week_challenge`
+Go to 'https://github.com/willsketch/Data_Engineering-Challenge'
